@@ -1,6 +1,6 @@
 # IPWA01-01
-@author: Bastian Fackelmann, 92201123
-Aufgabenstellung 1, CO2-Footprint:
+@author: Bastian Fackelmann, 92201123 <br>
+Aufgabenstellung 1, CO2-Footprint:<br>
 In einem interdisziplinären Team entwickelst Du professionelle Webseiten für eine große Non-Profit-Organisation, die sich mit dem Klimawandel beschäftigt. Um mehr Transparenz darüber zu schaffen, welche Unternehmen und Länder wie viel CO2 jährlich emittieren, soll eine öffentlich zugängliche Webseite ins Leben gerufen werden. Deine Aufgabe ist es, diese Seite zu entwerfen und umzusetzen.
   a) Richte ein öffentliches Code-Repository für Deine Webseite ein, z. B. in GitHub.
   b) Entwickle unter Zuhilfenahme moderner CSS- und/oder JavaScript-Frameworks eine Webanwendung, welche unter Berücksichtigung der oben beschriebenen Fallstudie die folgenden Anforderungen erfüllt:
