@@ -7,14 +7,25 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2/dist/css/bootstrap.min.css">
         <style type="text/css">
             * {font-family: Arial, sans-serif; }
-            header, footer { background-color: #fdb95d; font-weight: bold; font-size: 18px ; }
-            .local { font-weight: bold; background-color: #52ad0c; }
-            [dir="rtl"] main {
-                flex-direction: row-reverse;
+            header, footer {
+                background-color: #fdb95d;
+                font-weight: bold;
+                font-size: 18px ;
             }
+            .local {
+                font-weight: bold;
+                background-color: #52ad0c;
+            }
+            [dir="rtl"] main { flex-direction: row-reverse; }
             @media (min-width: 768px) {
-                .local { height: 100vh; }
+                .local { height: 100vh; } 
             }
+            h2 {
+                font-weight: bold;
+                color:#52ad0c;
+            }
+            thead { background-color: lightgray; }
+            #search {margin-bottom: 5px; }
         </style>
     </head>
 
@@ -46,6 +57,9 @@
                     <ul class="list-unstyled">
                         <br>
                         <li>
+                            <a class="text-decoration-none" style="color:#fdb95d" href="index.html">Homepage</a>
+                        </li>
+                        <li>
                             <a class="text-decoration-none" style="color:#fdb95d" href="footprints.html">Footprints</a>
                         </li>
                         <li>
@@ -54,7 +68,101 @@
                     </ul>
                 </nav>
                 <div class="col-md-10 col-12">
-                    <p>Footprints</p>
+                    <h2>Co2-Footprints</h2>
+                    <p>Hier werden fiktive Unternehmen mit der vielleicht höchsten Co2-Emission für willkürlich ausgewählte Länder dargestellt.</p>
+                    <input type="text" id="search" onkeyup="searchTable()" placeholder="Suche nach..." class="col-4">
+                    <table class="table table-hover" id="footprints">
+                        <thead>
+                            <tr>
+                                <th onclick="sortTable(0)">
+                                    Unternehmen
+                                </th>
+                                <th onclick="sortTable(1)">
+                                    Land
+                                </th>
+                                <th>
+                                    Co2-Emissionen
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Alpha-Institut</td>
+                                <td>USA</td>
+                                <td>37,5t</td>
+                            </tr>
+                            <tr>
+                                <td>Bravo GmbH</td>
+                                <td>Deutschland</td>
+                                <td>22t</td>
+                            </tr>
+                            <tr>
+                                <td>Charlie Limited</td>
+                                <td>Kanada</td>
+                                <td>117,8t</td>
+                            </tr>
+                            <tr>
+                                <td>Delta AG</td>
+                                <td>Österreich</td>
+                                <td>63,9t</td>
+                            </tr>
+                            <tr>
+                                <td>Echo Finance</td>
+                                <td>Frankreich</td>
+                                <td>44,4</td>
+                            </tr>
+                            <tr>
+                                <td>Foxtrot International</td>
+                                <td>Japan</td>
+                                <td>284,6t</td>
+                            </tr>
+                            <tr>
+                                <td>Golf KG</td>
+                                <td>Brasilien</td>
+                                <td>85,4t</td>
+                            </tr>
+                            <tr>
+                                <td>Hotel GmbH & Co. KG</td>
+                                <td>Australien</td>
+                                <td>14,7t</td>
+                            </tr>
+                            <tr>
+                                <td>India Corp.</td>
+                                <td>Ägypten</td>
+                                <td>192,3t</td>
+                            </tr>
+                            <tr>
+                                <td>Juliett Consulting</td>
+                                <td>Russland</td>
+                                <td>37,5t</td>
+                            </tr>
+                            <tr>
+                                <td>Kilo Reg.</td>
+                                <td>China</td>
+                                <td>846,2t</td>
+                            </tr>
+                            <tr>
+                                <td>Lima Clothing</td>
+                                <td>Peru</td>
+                                <td>84,3t</td>
+                            </tr>
+                            <tr>
+                                <td>Mike Sports</td>
+                                <td>Schweden</td>
+                                <td>284,6t</td>
+                            </tr>
+                            <tr>
+                                <td>November Airways</td>
+                                <td>Spanien</td>
+                                <td>1259,7t</td>
+                            </tr>
+                            <tr>
+                                <td>Oscar Oils</td>
+                                <td>Saudi-Arabien</td>
+                                <td>843,8</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </main>
@@ -66,5 +174,76 @@
                 </ul>
             </nav>
         </footer>
+        <script>
+            function sortTable(n) {
+                var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+                table = document.getElementById("footprints");
+                switching = true;
+                dir = "asc";
+                while (switching) {
+                    switching = false;
+                    rows = table.rows;
+                    for (i = 1; i < (rows.length - 1); i++) {
+                    shouldSwitch = false;
+                    x = rows[i].getElementsByTagName("TD")[n];
+                    y = rows[i + 1].getElementsByTagName("TD")[n];
+                    if (dir == "asc") {
+                        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                            shouldSwitch = true;
+                            break;
+                        }
+                    } else if (dir == "desc") {
+                        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                            shouldSwitch = true;
+                            break;
+                        }
+                    }
+                    }
+                    if (shouldSwitch) {
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+                    switchcount ++;
+                    } else {
+                    if (switchcount == 0 && dir == "asc") {
+                        dir = "desc";
+                        switching = true;
+                    }
+                    }
+                }
+            }
+        </script>
+        <script>
+            function searchTable() {
+                var input, filter, table, tr, td, i, txtValue;
+                input = document.getElementById("search");
+                filter = input.value.toUpperCase();
+                table = document.getElementById("footprints");
+                tr = table.getElementsByTagName("tr");
+                
+                for (i = 0; i < tr.length; i++) {
+                    td = tr[i].getElementsByTagName("td")[0];
+                    if (td) {
+                        txtValue = td.textContent || td.innerText;
+                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                            tr[i].style.display = "";
+                        } else {
+                            tr[i].style.display = "none";
+                        }
+                    }
+                }
+
+                for (i = 0; i < tr.length; i++) {
+                    td = tr[i].getElementsByTagName("td")[1];
+                    if (td) {
+                        txtValue = td.textContent || td.innerText;
+                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                            tr[i].style.display = "";
+                        } else {
+                            tr[i].style.display = "none";
+                        }
+                    }
+                }
+            }
+        </script>
     </body>
 </html>
